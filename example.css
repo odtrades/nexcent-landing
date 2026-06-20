@@ -1,0 +1,3795 @@
+/* ==========================================================================
+   GLOBAL LAYOUT RESET (Add to the very top of your CSS file)
+   ========================================================================== */
+html,
+body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    overflow-x: hidden;
+    /* Prevents unwanted horizontal scrolling */
+}
+
+* {
+    box-sizing: border-box;
+    /* Makes sure paddings don't break element widths */
+}
+
+
+.justified-text-fix {
+    text-align: justify !important;
+
+    /* 1. The Core Fix: Let the browser hyphenate words instead of forcing massive spaces */
+    -webkit-hyphens: auto !important;
+    -ms-hyphens: auto !important;
+    hyphens: auto !important;
+
+    /* 2. Improve the justification algorithm for modern browsers */
+    text-justify: inter-word !important;
+
+    /* 3. Break exceptionally long words or URLs if they risk overflowing */
+    word-break: break-word !important;
+}
+
+/* 1. Full-Width Background Wrapper */
+.header {
+    width: 100%;
+    background: var(--Neutral-Silver, #F5F7FA);
+}
+
+/* 2. Responsive Container & Layout Grid */
+.container {
+    width: 100%;
+    /* Forces the container to take up full available width */
+    margin: 0 auto;
+    /* Centers the navbar on the screen */
+    padding: 0 150px;
+    /* Standard edge padding so it doesn't touch monitor edges */
+    box-sizing: border-box;
+    /* Ensures padding doesn't break width calculations */
+    max-width: 1440px;
+}
+
+
+/* 3. The Functional Navbar Flexbox */
+.navbar {
+    width: 100%;
+    /* Ensures the flex layout spans edge-to-edge of the container */
+    height: 84px;
+    /* Exact height from your Figma design */
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    /* Spreads out logo, links, and buttons */
+    flex-wrap: nowrap;
+}
+
+.navbar__menu {
+    display: flex;
+    /* Use regular flex instead of inline-flex for block layout */
+    align-items: center;
+    /* Vertically aligns text in the center of the 84px bar */
+    gap: 25px;
+    /* The exact spacing from your Figma design */
+    list-style: none;
+    /* Removes default bullet points from <ul> */
+    flex-shrink: 1;
+}
+
+/* ==========================================================================
+   MOBILE TOGGLE BUTTON BASE (Desktop View - Hidden)
+   ========================================================================== */
+.navbar__toggle {
+    display: none;
+    /* Hidden on desktop */
+    flex-direction: column;
+    justify-content: space-between;
+    width: 24px;
+    height: 18px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+}
+
+.hamburger-bar {
+    width: 100%;
+    height: 3px;
+    background-color: var(--Text-Gray-700, #4D4D4D);
+    border-radius: 2px;
+    transition: all 0.3s ease;
+}
+
+.navbar__item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* 1. Base style for regular inactive links (Service, Feature, etc.) */
+.navbar__link {
+    font-family: 'Inter', sans-serif;
+    font-size: 1rem;
+    /* 16px */
+    line-height: 1.5rem;
+    /* 24px */
+    font-style: normal;
+    text-decoration: none;
+    /* Removes the underline */
+
+    /* Regular links are lighter and thinner */
+    color: var(--Text-Gray-700, #4D4D4D);
+    font-weight: 400;
+
+    transition: color 0.2s ease, font-weight 0.2s ease;
+}
+
+/* 2. Exclusive styling for the Active Home Link */
+.navbar__link--active {
+    color: var(--Text-Gray-900, #18191F);
+    /* The exact dark color you pasted */
+    font-weight: 500;
+    /* Thicker active weight from Figma */
+}
+
+/* Optional: If you want regular links to turn dark when hovered */
+.navbar__link:hover {
+    color: var(--Text-Gray-900, #18191F);
+}
+
+.navbar__actions {
+    display: flex;
+    /* Standard flex layout */
+    align-items: center;
+    /* Centered vertically to keep it aligned with the logo and menu */
+    gap: 14px;
+    /* Exact spacing between Login and Sign up buttons */
+}
+
+/* 1. Base Button Styles (Shared by both buttons) */
+.btn {
+    display: inline-flex;
+    padding: 10px 20px;
+    align-items: center;
+    gap: 10px;
+    border-radius: 6px;
+    font-family: 'Inter', sans-serif;
+    font-size: 1rem;
+    font-weight: 500;
+    line-height: 24px;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+}
+
+/* 2. Login Button Style */
+.btn--login {
+    background: var(--Neutral-Silver, #F5F7FA);
+    /* Typically the login text is the brand green or dark gray. Let's make it the brand green */
+    color: var(--Brand-Primary, #4CAF4F);
+}
+
+.btn--login:hover {
+    background: #E5E7EB;
+    /* Subtle hover effect */
+}
+
+/* 3. Sign Up Button Style */
+.btn--signup {
+    background: var(--Brand-Primary, #4CAF4F);
+    color: #FFFFFF;
+    /* White text so it is readable on the green background */
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+
+.btn--signup:hover {
+    background: #3B8E3F;
+    /* Slightly darker green for hover effect */
+}
+
+.navbar__logo {
+    display: flex;
+    /* Use flex to align the icon and text images */
+    align-items: center;
+    /* Keeps them perfectly centered vertically */
+    gap: 8px;
+    /* Exact spacing from your Figma design */
+    text-decoration: none;
+    /* Just in case, removes any default anchor lines */
+}
+
+/* Ensure the images inside don't distort */
+.navbar__logo img {
+    display: block;
+    height: auto;
+}
+
+/* The full-width outer section providing the light silver background */
+.hero {
+    background: var(--Neutral-Silver, #F5F7FA);
+    width: 100%;
+}
+
+/* The layout engine container splitting the left and right branches */
+.hero__layout-wrapper {
+    display: flex;
+    justify-content: center;
+    /* or flex-start, depending on if you want it perfectly centered */
+    align-items: center;
+    gap: 104px;
+    /* This will now be the ONLY space between the text and image */
+    padding: 96px 0;
+    width: 100%;
+}
+
+.hero__left-branch {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    /* Keeps all text and the button left-aligned */
+    gap: 32px;
+    /* Perfect 32px gap separating text box and button box */
+    flex: 1 1 0;
+    /* Let it scale smoothly across modern screens */
+    min-width: 450px;
+}
+
+.hero__text-group {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+    align-self: stretch;
+}
+
+.hero__title {
+    align-self: stretch;
+    color: var(--Neutral-D_Grey, #4D4D4D);
+    font-family: 'Inter', sans-serif;
+    font-size: 64px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 76px;
+    /* 118.75% */
+    margin: 0px;
+}
+
+/* Modifer class to turn just the specific phrase green */
+.hero__title--green {
+    color: var(--Brand-Primary, #4CAF4F);
+}
+
+.hero__subtitle {
+    align-self: stretch;
+    margin: 0;
+    /* Clear out default browser paragraph margins */
+    color: var(--Neutral-Grey, #717171);
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 24px;
+    /* 150% */
+}
+
+/* 1. The wrapper handles positioning in your left column */
+.hero__button-box {
+    display: block;
+}
+
+/* 2. The link itself holds all the style, padding, and text tokens */
+.btn--signup {
+    /* Layout & Box Size */
+    display: inline-flex;
+    padding: 14px 32px;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    border-radius: 4px;
+    background: var(--Brand-Primary, #4CAF4F);
+    text-decoration: none;
+
+    /* Typography */
+    color: var(--Neutral-White, #FFF);
+    text-align: center;
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 24px;
+
+    /* Micro-interactions */
+    cursor: pointer;
+    /* Smoothly transitions the background color over 0.2 seconds */
+    transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+/* 3. Hover State (When user mouse glides over) */
+.btn--signup:hover {
+    /* A slightly deeper rich green for visual feedback */
+    background-color: #3B8E41;
+}
+
+/* 4. Active State (The exact millisecond the user clicks down) */
+.btn--signup:active {
+    /* Gives a subtle "pressed down" physical depth effect */
+    transform: scale(0.98);
+}
+
+/* 1. The container defines the exact box size from Figma */
+.hero__right-branch {
+    width: 391px;
+    height: 407px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-shrink: 0;
+}
+
+/* 2. The image fluidly fills the container perfectly */
+.hero__image {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    /* Ensures the illustration stays sharp and un-stretched */
+    display: block;
+}
+
+/* Make sure your main container allows absolute positioning inside it */
+.hero {
+    position: relative;
+    background-color: var(--Neutral-Silver, #F5F7FA);
+    width: 100%;
+}
+
+/* 1. Position the dot wrapper at the bottom center */
+.hero__slider-dots {
+    position: absolute;
+    bottom: 24px;
+    /* Distance from the bottom edge of the hero section */
+    left: 50%;
+    transform: translateX(-50%);
+    /* Perfectly centers it horizontally */
+
+    display: flex;
+    gap: 8px;
+    /* Space between each dot */
+}
+
+/* 2. Style the individual dots */
+.dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: var(--Brand-Primary-Light, #4CAF4F);
+    opacity: 0.3;
+    /* Inactive dots are faded out */
+    cursor: pointer;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+/* 3. Style the active/selected dot */
+.dot--active {
+    opacity: 1;
+    /* Fully visible */
+    transform: scale(1.2);
+    /* Slightly larger to stand out, or you can make it oblong if Figma shows a pill shape */
+}
+
+/* Hover effect for desktop users */
+.dot:hover {
+    opacity: 0.7;
+}
+
+.home {
+    /* Changed from inline-flex to flex so the container fills the full screen width */
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+
+    /* This keeps the exact 40px spacing between Hero, Clients, and Community from Figma */
+    gap: 100px;
+    width: 100%;
+}
+
+/* ==========================================================================
+   CLIENTS SECTION STYLES
+   ========================================================================== */
+
+.clients {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    /* Matches the exact 16px vertical gap between text and logos from your Figma specs */
+    gap: 16px;
+
+    /* Global alignment footprint */
+    width: 100%;
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 0 150px;
+    box-sizing: border-box;
+}
+
+.clients__text-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    /* Keeps your exact 8px vertical gap between the title and the description */
+    gap: 8px;
+
+    /* Responsive fix: Fits beautifully inside your 150px padding axis */
+    width: 100%;
+    max-width: 1110px;
+
+    /* Centers the text content inside itself */
+    text-align: center;
+}
+
+.clients__logos {
+    display: flex;
+    height: 98px;
+    justify-content: space-between;
+    align-items: center;
+    align-self: stretch;
+    /* Spreads out perfectly to match the text group width above */
+
+    /* Responsive safety: Allows logos to wrap on smaller screens instead of shrinking to microscopic sizes */
+    flex-wrap: wrap;
+}
+
+/* Optional: Clean constraint for the logo images inside so they scale uniformly */
+.clients__logo-img {
+    max-height: 100%;
+    object-fit: contain;
+}
+
+.clients__title {
+    align-self: stretch;
+    color: var(--Neutral-D_Grey, #4D4D4D);
+    text-align: center;
+
+    /* Heading/Headline 2 */
+    font-family: 'Inter', sans-serif;
+    font-size: 36px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 44px;
+    /* 122.222% */
+
+    /* Clear out default browser heading margins */
+    margin: 0;
+}
+
+.clients__description {
+    align-self: stretch;
+    color: var(--Neutral-Grey, #717171);
+    text-align: center;
+
+    /* Body/Regular/Body 2 */
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 24px;
+    /* 150% */
+
+    /* Clear out default browser paragraph margins */
+    margin: 0;
+}
+
+.clients__logos {
+    display: flex;
+    height: 98px;
+    justify-content: space-between;
+    align-items: center;
+    align-self: stretch;
+}
+
+.community {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    /* Exact 16px vertical gap between the title group and the cards container */
+    gap: 50px;
+
+    /* Matches your global layout footprint */
+    width: 100%;
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 0 150px;
+    /* Aligns with your navbar and hero boundaries */
+    box-sizing: border-box;
+}
+
+.community__text-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* Centers the title and description text fields */
+
+    /* Exact 8px vertical gap between your title and subtitle from Figma */
+    gap: 20px;
+
+    width: 100%;
+    align-self: stretch;
+    /* Allows it to expand cleanly within the master community section */
+}
+
+.community__title {
+    width: 100%;
+    max-width: 542px;
+    /* Forces text wrap to match Figma exactly on desktop */
+    color: var(--Neutral-D_Grey, #4D4D4D);
+    text-align: center;
+
+    /* Heading/Headline 2 */
+    font-family: 'Inter', sans-serif;
+    font-size: 36px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 44px;
+    /* 122.222% */
+
+    /* Clear default browser margins */
+    margin: 0;
+}
+
+.community__description {
+    align-self: stretch;
+    color: var(--Neutral-Grey, #717171);
+    text-align: center;
+
+    /* Body/Regular/Body 2 */
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 24px;
+    /* 150% */
+
+    /* Clear default browser margins */
+    margin: 0;
+}
+
+.community__cards-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 32px;
+    /* Matches our locked-in global footprint */
+    width: 100%;
+    max-width: 1440px;
+    box-sizing: border-box;
+
+    /* Responsive safety: lets cards stack vertically on smaller mobile screens */
+    flex-wrap: wrap;
+}
+
+/* 1. Base Card Styling (Ensure transitions are active) */
+.community__card {
+    background: #FFFFFF;
+    border-radius: 8px;
+    /* Smooth rounded corners */
+    padding: 24px;
+    box-sizing: border-box;
+
+    /* Crucial: Smooth transition for the shadow and positioning change */
+    transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1),
+        box-shadow 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+
+    /* Optional base shadow so the transition isn't harsh */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+/* 2. The Hover Trigger */
+.community__card:hover {
+    /* Lifts the card slightly upwards */
+    transform: translateY(-6px);
+
+    /* Creates a soft, deep depth shadow underneath */
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.12);
+
+    /* Changes cursor to hand pointer to indicate interactivity */
+    cursor: pointer;
+}
+
+/* 3. Optional: Subtle Icon Pop on Hover */
+/* This gives an extra micro-interaction to the icon inside the active card */
+.community__card:hover .community__card-icon {
+    transform: scale(1.05);
+}
+
+.community__card-icon {
+    transition: transform 0.3s ease;
+}
+
+.community__card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    /* Exact layout & padding sizing from Figma */
+    width: 299px;
+    padding: 24px 32px;
+    gap: 8px;
+    /* Internal vertical spacing between icon, title, and text */
+    flex-shrink: 0;
+
+    /* Visual styling variables */
+    border-radius: 8px;
+    background: var(--Neutral-White, #FFF);
+    box-shadow: 0 2px 4px 0 rgba(171, 190, 209, 0.20);
+    box-sizing: border-box;
+    /* Ensures padding stays contained within the 299px width */
+}
+
+.community__card-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    /* Exact 16px gap separating the icon image and the title text from Figma */
+    gap: 16px;
+
+    width: 100%;
+    max-width: 267px;
+    /* Matches the layout bounds inside your card components */
+}
+
+.community__card-icon-wrapper {
+    width: 65px;
+    height: 56px;
+
+    /* Ensures centering if your icons are raw SVGs inside the wrapper */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Optional: Ensures the vector/image itself fills the bounding box properly */
+.community__card-icon-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.community__card-title {
+    align-self: stretch;
+    color: var(--Neutral-D_Grey, #4D4D4D);
+    text-align: center;
+
+    /* Heading/Headline 3 */
+    font-family: 'Inter', sans-serif;
+    font-size: 28px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 36px;
+    /* 128.571% */
+
+    /* Clear default browser heading margins */
+    margin: 0;
+}
+
+.community__card-body {
+    display: flex;
+    align-items: flex-start;
+
+    /* Exact 8px internal vertical/horizontal gap layout rule from Figma */
+    gap: 8px;
+
+    /* Ensures the text box fills out the width of the card framework */
+    width: 100%;
+}
+
+.community__card-description {
+    width: 100%;
+    max-width: 251px;
+    /* Replicates the exact text wrap bound from your Figma spec */
+    color: var(--Neutral-Grey, #717171);
+    text-align: center;
+
+    /* Body/Regular/Body 3 */
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 20px;
+    /* 142.857% */
+
+    /* Clear default browser paragraph margins */
+    margin: 0;
+}
+
+.body-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+
+    /* Perfect vertical separation between each major layout block */
+    gap: 70px;
+
+    width: 100%;
+    box-sizing: border-box;
+
+
+    padding-top: 90px;
+    margin-bottom: 90px;
+}
+
+/* ==========================================================================
+   UNLOCK SECTION - CONTAINER & LEFT COLUMN (IMAGE)
+   ========================================================================== */
+
+/* Section Parent Wrapper Box */
+.unlock {
+    display: flex;
+    align-items: flex-start;
+    width: 100%;
+}
+
+/* Inner Row Layout Track Component */
+.unlock__container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    /* Responsive layout constraints mirroring your design safety space */
+    width: 100%;
+    max-width: 1140px;
+    margin: 0 auto;
+    box-sizing: border-box;
+}
+
+/* Frame 35: Left Column Graphic Wrapper Frame */
+.unlock__image-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-shrink: 0;
+
+    /* Exact layout bounding from your Figma specification specs */
+    width: 442px;
+    height: 433px;
+    padding: 52px 0;
+    box-sizing: border-box;
+}
+
+/* mobile-login/rafiki: The Graphic Asset Vector Layer */
+.unlock__img {
+    /* Rounded cleanly from sub-pixels for crisp browser rendering */
+    width: 442px;
+    height: 329px;
+
+    flex-shrink: 0;
+    object-fit: contain;
+}
+
+.unlock__content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+
+    /* Exact layout bounding from your Figma specification specs */
+    gap: 32px;
+    width: 100%;
+    max-width: 661px;
+    flex-shrink: 1;
+
+    box-sizing: border-box;
+}
+
+.unlock__text-group {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+
+    /* Exact layout bounding from your Figma specification specs */
+    width: 100%;
+    gap: 16px;
+}
+
+.unlock__title {
+    /* Layout */
+    align-self: stretch;
+
+    /* Typography */
+    font-family: 'Inter', sans-serif;
+    font-size: 36px;
+    font-weight: 600;
+    line-height: 44px;
+    font-style: normal;
+
+    /* Color */
+    color: #4D4D4D;
+    /* var(--Neutral-D_Grey) */
+
+    /* Reset margins for consistent alignment */
+    margin: 0;
+}
+
+.unlock__description {
+    /* Layout */
+    align-self: stretch;
+
+    /* Typography */
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 20px;
+    font-style: normal;
+    text-align: justify;
+
+    /* Color */
+    color: #717171;
+    /* var(--Neutral-Grey) */
+
+    /* Reset margins for clean alignment */
+    margin: 0;
+}
+
+.unlock__button {
+    display: inline-flex;
+    /* Ensures it sizes perfectly around your padding rules */
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+
+    /* Layout Dimensions & Curves */
+    padding: 14px 32px;
+    border-radius: 4px;
+
+    /* Colors */
+    background-color: #4CAF4F;
+    /* var(--Brand-Primary) */
+    text-decoration: none;
+
+    /* Smooth transition effect for mouse hovers */
+    transition: background-color 0.2s ease-in-out;
+}
+
+/* Interactive feedback state */
+.unlock__button:hover {
+    background-color: #3B8E3F;
+    /* Slightly darker green tone for depth */
+}
+
+.unlock__button-label {
+    /* Layout Alignment */
+    text-align: center;
+
+    /* Typography Styles */
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 24px;
+
+    /* Color Token */
+    color: #FFFFFF;
+    /* var(--Neutral-White) */
+}
+
+/* ==========================================================================
+   ACHIEVEMENTS SECTION
+   ========================================================================== */
+
+/* Full-bleed section background track layout wrapper */
+.achievements {
+    width: 100%;
+    background-color: #F5F7FA;
+    /* Typical light gray background token for these section types */
+}
+
+/* Row wrapper container element */
+.achievements__container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    max-width: 1440px;
+    margin: 0 auto;
+
+    /* Corrected to match our global 150px alignment system */
+    padding: 64px 150px;
+    box-sizing: border-box;
+
+    
+}
+
+.achievements__heading-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+
+    /* Responsive layout constraints */
+    width: 100%;
+    max-width: 540px;
+    flex-shrink: 0;
+}
+
+.achievements__text-group {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+    width: 100%;
+    /* Ensures it fills its parent container nicely */
+}
+
+/* Achievements Section Title Heading */
+.achievements__title {
+    width: 100%;
+    max-width: 408px;
+    margin: 0;
+    /* Clear out default browser heading margins */
+
+    /* Typography Specifications */
+    font-family: 'Inter', sans-serif;
+    font-size: 36px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 44px;
+
+    /* Default Dark Gray Base Color Token */
+    color: #4D4D4D;
+    /* var(--Neutral-D_Grey) */
+}
+
+/* Green Color Accent Treatment */
+.achievements__title .text-green {
+    color: #4CAF4F;
+    /* var(--Brand-Primary) */
+    font-family: inherit;
+    /* Automatically inherits the font weights/sizes from parent */
+    font-size: inherit;
+    font-weight: inherit;
+    line-height: inherit;
+}
+
+/* Achievements Subtext Description */
+.achievements__description {
+    align-self: stretch;
+    margin: 0;
+    /* Clears default browser paragraph spacing */
+
+    /* Typography Specs */
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 24px;
+
+    /* Deep Text Color Token */
+    color: #4D4D4D;
+    /* var(--Text-Gray-900) */
+}
+
+/* Container for the stats items/rows */
+.achievements__counts {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 40px;
+
+    /* Ensure it doesn't shrink awkwardly next to the text column */
+    flex-shrink: 0;
+}
+
+/* Stats grid horizontal row layout */
+.achievements__row {
+    display: flex;
+    flex-direction: row;
+    /* Arranges the stat items horizontally side-by-side */
+    align-items: center;
+    gap: 150px;
+    width: 100%;
+    /* Spans the full width of the parent container */
+}
+
+/* Individual stat block item layout */
+.achievements__item {
+    display: flex;
+    flex-direction: row;
+    /* Ensures icon and text stack sit cleanly side-by-side */
+    align-items: center;
+    gap: 16px;
+
+    /* Keeps items neatly balanced within rows */
+    flex: 1;
+}
+
+/* Individual Stat Icon Block */
+.achievements__icon {
+    width: 48px;
+    height: 48px;
+
+    /* Ensures the icon maintains aspect ratio and doesn't squash or distort */
+    object-fit: contain;
+    flex-shrink: 0;
+}
+
+/* Text content column layout stack */
+.achievements__details {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+
+    /* Since Figma didn't specify a gap, we will set a small fallback 
+       or let default line-height / typography rules handle spacing */
+    gap: 0;
+}
+
+/* Big Metric Counter Number */
+.achievements__number {
+    display: block;
+    /* Ensures it stacks cleanly as a separate line layer */
+
+    /* Typography Specifications */
+    font-family: 'Inter', sans-serif;
+    font-size: 28px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 36px;
+
+    /* Neutral Dark Gray Color Token */
+    color: #4D4D4D;
+    /* var(--Neutral-D_Grey) */
+}
+
+/* Metric Description Label */
+.achievements__label {
+    display: block;
+    /* Ensures it drops cleanly underneath the number block */
+
+    /* Typography Specifications */
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 24px;
+
+    /* Medium Gray Color Token */
+    color: #717171;
+    /* var(--Neutral-Grey) */
+}
+
+/* ==========================================================================
+   CALENDAR SECTION
+   ========================================================================== */
+
+/* Outer Section Wrapper */
+.calendar {
+    width: 100%;
+    padding: 0;
+}
+
+/* Inner Layout Grid Container */
+.calendar__container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    /* Vertically aligns elements in the center */
+
+    width: 100%;
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 0 150px;
+    /* Staying loyal to our 150px grid lines! */
+    box-sizing: border-box;
+}
+
+/* Image Column Container */
+.calendar__image-wrapper {
+    width: 442px;
+    /* Cleaned up from 441.533px */
+    height: 434px;
+    /* Cleaned up from 433.399px */
+    flex-shrink: 0;
+    /* Prevents the illustration from warping/shrinking */
+}
+
+/* Image Element Graphic */
+.calendar__img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    /* Ensures the graphic stays crisp and perfectly proportioned */
+}
+
+/* Right Column: Text and Button Content Wrapper */
+.calendar__content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 32px;
+
+    width: 100%;
+    max-width: 661px;
+    flex-shrink: 1;
+    /* Prevents the column from narrowing layout lines */
+}
+
+/* Core Typographic Hierarchy Wrapper */
+.calendar__text-group {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 25px;
+
+    width: 100%;
+    max-width: 601px;
+}
+
+/* Main Section Heading */
+.calendar__title {
+    align-self: stretch;
+    margin: 0;
+    /* Clears default browser heading spacing */
+
+    /* Typography Specifications */
+    font-family: 'Inter', sans-serif;
+    font-size: 36px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 44px;
+
+    /* Colors */
+    color: #4D4D4D;
+    /* var(--Neutral-D_Grey) */
+}
+
+/* Section Description Paragraph */
+.calendar__description {
+    margin: 0;
+    /* Erases standard native browser margins */
+
+    /* Typography Specifications */
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 20px;
+    text-align: justify;
+
+    /* Colors */
+    color: #717171;
+    /* var(--Neutral-Grey) */
+}
+
+/* Primary Action Button Link Component */
+.calendar__button {
+    display: inline-flex;
+    /* Keeps it behaving like an inline block but unlocks flex layout engines */
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+
+    /* Box Model Sizing and Shape Layout Elements */
+    padding: 14px 32px;
+    border-radius: 4px;
+    text-decoration: none;
+    /* Strips browser anchor underline decoration strings */
+
+    /* Solid Brand Primary Color Variable Tokens */
+    background: #4CAF4F;
+    /* var(--Brand-Primary) */
+
+    /* Performance transitions for smooth hover states */
+    transition: background-color 0.2s ease-in-out;
+}
+
+/* Accessible Interactive State Layer Tracking */
+.calendar__button:hover {
+    background: #3B963E;
+    /* Darkens slightly on mouse cursor focus layers */
+}
+
+/* Button Inner Text Label */
+.calendar__button-label {
+    text-align: center;
+
+    /* Typography Specifications */
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 24px;
+
+    /* Color Token */
+    color: #FFFFFF;
+    /* var(--Neutral-White) */
+}
+
+/* ==========================================================================
+   CUSTOMERS SECTION
+   ========================================================================== */
+
+/* Full-width wrapper to carry the light silver background stretch */
+.customers {
+    width: 100%;
+    background: #F5F7FA;
+    /* var(--Neutral-Silver) */
+}
+
+/* Inner Layout Grid Container */
+.customers__container {
+    display: flex;
+    align-items: stretch;
+    gap: 78px;
+    /* High-contrast gap spacing between child elements */
+
+    width: 100%;
+    max-width: 1440px;
+    margin: 0 auto;
+
+    /* 32px vertical breathing room, locked to our 150px master side layout rules */
+    padding: 32px 150px;
+    box-sizing: border-box;
+}
+
+/* Image Column Frame */
+.customers__image-wrapper {
+    width: 326px;
+    height: 326px;
+    flex-shrink: 0;
+
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 8px 16px 0 rgba(171, 190, 209, 0.40);
+
+    /* Ensuring no underlying wrapper color bleeds through */
+    background-color: #F5F7FA;
+}
+
+/* Graphic Element Styling */
+.customers__img {
+    display: block;
+    /* Destroys the inline text-baseline gap completely */
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border: none;
+    /* Strips out any native browser border defaults */
+}
+
+/* Right Side Content Column Layout Track */
+.customers__info {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    /* Automatically aligns top text and bottom footer perfectly to match image bounds */
+    flex: 1;
+}
+
+/* Content Block Group (Quote + Author Attribution) */
+.customers__content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+
+    /* Stretches to fill the entire parent column width layout */
+    align-self: stretch;
+}
+
+/* Testimonial Quote Text Block */
+.customers__quote {
+    align-self: stretch;
+    margin: 0;
+    /* Clears native browser margin variations */
+
+    /* Typography Specifications */
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 24px;
+    text-align: justify;
+
+    /* Colors */
+    color: #717171;
+    /* var(--Neutral-Grey) */
+}
+
+/* Customer Author Metadata Stack */
+.customers__author-meta {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+
+    /* Stretches to match the layout width lines perfectly */
+    align-self: stretch;
+}
+
+/* Customer Name Label */
+.customers__name {
+    align-self: stretch;
+    margin: 0;
+    /* Clear out native user-agent header gaps */
+
+    /* Typography Specifications */
+    font-family: 'Inter', sans-serif;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 28px;
+
+    /* Brand Accent Branding */
+    color: #4CAF4F;
+    /* var(--Brand-Primary) */
+}
+
+/* Customer Corporate Title / Organization Subtitle */
+.customers__title {
+    align-self: stretch;
+
+    /* Typography Specifications */
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 24px;
+
+    /* Colors */
+    color: #89939E;
+    /* var(--Neutral-L_Grey) */
+}
+
+/* Bottom Row Layout (Logos + CTA Link) */
+.customers__footer-row {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+
+    /* Stretches to match the layout width perfectly */
+    align-self: stretch;
+    margin-top: 32px;
+}
+
+/* Client Brand Logo Strip Container */
+.customers__logos {
+    display: flex;
+    align-items: center;
+    gap: 41px;
+    flex-shrink: 0;
+    /* CRITICAL: Prevents the text link from compressing the logos */
+    flex-wrap: nowrap;
+    /* Forces them to stay strictly on one solid line */
+}
+
+/* Logo 1 Specific Wrapper */
+.customers__logo-logo1 {
+    display: flex;
+    align-items: center;
+
+    /* Exact pixel paddings from design spec */
+    padding: 0.195px 7.647px 7.805px 0.353px;
+
+    border-radius: 8px;
+    background: #E8F5E9;
+    /* var(--Tint-T5) */
+    flex-shrink: 0;
+}
+
+/* Ensure the vector inside behaves gracefully within the padding boundaries */
+.customers__logo-logo1 img {
+    display: block;
+    width: auto;
+    height: auto;
+}
+
+/* Logo 2 Specific Wrapper */
+.customers__logo-logo2 {
+    display: flex;
+    align-items: center;
+    height: 48px;
+
+    /* Exact pixel paddings from design spec */
+    padding: 9.847px 7.888px 10.153px 0.112px;
+
+    border-radius: 8px;
+    background: #F5F7FA;
+    /* var(--Neutral-Silver) */
+    box-sizing: border-box;
+    /* Safely locks padding to the 48px height footprint */
+    flex-shrink: 0;
+}
+
+.customers__logo-logo2 img {
+    display: block;
+    width: auto;
+    height: auto;
+}
+
+/* Logo 3 Specific Wrapper */
+.customers__logo-logo3 {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    height: 48px;
+
+    /* Pixel paddings from design spec */
+    padding: 8.847px 0 9.153px 0;
+
+    border-radius: 8px;
+    background: #F5F7FA;
+    /* var(--Neutral-Silver) */
+    box-sizing: border-box;
+    flex-shrink: 0;
+}
+
+.customers__logo-logo3 img {
+    display: block;
+    width: auto;
+    height: auto;
+}
+
+/* Logo 4 Specific Wrapper */
+.customers__logo-logo4 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+
+    /* Exact pixel paddings from design spec */
+    padding: 9.847px 1px 9.153px 0;
+
+    border-radius: 8px;
+    background: #F5F7FA;
+    /* var(--Neutral-Silver) */
+    box-sizing: border-box;
+    flex-shrink: 0;
+}
+
+.customers__logo-logo4 img {
+    display: block;
+    width: auto;
+    height: auto;
+}
+
+/* Logo 5 Specific Wrapper */
+.customers__logo-logo5 {
+    display: flex;
+    align-items: center;
+    height: 48px;
+
+    /* Exact pixel paddings from design spec */
+    padding: 10.847px 7px 10.153px 0;
+
+    border-radius: 8px;
+    background: #F5F7FA;
+    /* var(--Neutral-Silver) */
+    box-sizing: border-box;
+    flex-shrink: 0;
+}
+
+.customers__logo-logo5 img {
+    display: block;
+    width: auto;
+    height: auto;
+}
+
+/* Logo 6 Specific Wrapper */
+.customers__logo-logo6 {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    height: 48px;
+
+    /* Exact pixel paddings from design spec */
+    padding: 13.847px 0 14.153px 0;
+
+    border-radius: 8px;
+    background: #F5F7FA;
+    /* var(--Neutral-Silver) */
+    box-sizing: border-box;
+    flex-shrink: 0;
+}
+
+.customers__logo-logo6 img {
+    display: block;
+    width: auto;
+    height: auto;
+}
+
+/* Interactive Link Button ("Meet all customers") */
+.customers__link {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px;
+    flex-shrink: 0;
+    /* Prevents the container block from distorting */
+    text-decoration: none;
+    margin-left: auto;
+    /* Clean layout trick: pushes the link to the far right side of the row */
+    transition: filter 0.2s ease;
+}
+
+/* "Meet all customers" Link Label */
+.customers__link-text {
+    width: 150px;
+
+    /* Typography Specifications */
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 28px;
+
+    /* Branding Color */
+    color: #4CAF4F;
+    /* var(--Brand-Primary) */
+
+    flex-shrink: 0;
+}
+
+/* Arrow Icon Wrapper Container */
+.customers__link-icon {
+    /* Using the exact vector canvas scale from your spec */
+    width: 17px;
+    height: 10px;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+/* Forces the SVG graphic to stay flexible and scale with its wrapper */
+.customers__link-icon svg {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+.customers__link:hover {
+    /* brightness(0.8) makes the text and SVG exactly 20% darker */
+    filter: brightness(0.8);
+}
+
+/* Community Updates Section Block */
+.community-updates {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 40px;
+    width: 100%;
+    box-sizing: border-box;
+
+    /* Exact design grid alignment: 0 top/bottom, 150px left/right */
+    padding: 0 150px;
+}
+
+
+/* Header Content Container Wrapper */
+.community-updates__header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap:20px;
+
+    /* Layout Constraints */
+    width: 1110px;
+    max-width: 100%;
+    /* Safety guard to ensure fluid scaling on smaller displays */
+    box-sizing: border-box;
+}
+
+/* Section Main Headline */
+.community-updates__title {
+    align-self: stretch;
+    text-align: center;
+    color: #4D4D4D;
+    /* var(--Neutral-D_Grey) */
+
+    /* Typography Scales */
+    font-family: 'Inter', sans-serif;
+    font-size: 36px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 44px;
+    margin: 0;
+    /* Clear default browser heading margins */
+}
+
+/* Section Supporting Subtitle Text */
+.community-updates__subtitle {
+    width: 628px;
+    max-width: 100%;
+    /* Keeps text fluidly readable on mobile sizes */
+    text-align: center;
+    color: #717171;
+    /* var(--Neutral-Grey) */
+
+    /* Typography Scales */
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 24px;
+    margin: 0;
+    /* Clear default browser paragraph margins */
+}
+
+/* Cards Grid Wrapper Container */
+.community-updates__grid {
+    display: flex;
+    justify-content: center;
+    align-items: stretch;
+    gap: 24px;
+
+    /* Layout Dimensions */
+    width: 1440px;
+    max-width: 100%;
+    /* Safety guard against fixed-width screen breakages */
+    padding: 0 150px;
+    box-sizing: border-box;
+}
+
+/* Individual Content Card Wrapper */
+.community-updates__card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    /* Layout Defaults */
+    flex: 1;
+    /* Allows cards to split rows equally inside the space-between grid */
+    box-sizing: border-box;
+}
+
+/* ==========================================================================
+   FIRST COMPONENT: IMAGE LAYERS
+   ========================================================================== */
+.community-updates__image-wrapper {
+    width: 368px;
+    height: 286px;
+    border-radius: 8px;
+    overflow: hidden;
+    /* Ensures the image cuts clean at the 8px rounded border */
+}
+
+.community-updates__img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    /* Replicates figma's 50% / cover layout scaling */
+}
+
+/* ==========================================================================
+   SECOND COMPONENT: OVERLAPPING CONTENT CARD
+   ========================================================================== */
+.community-updates__content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    padding: 16px;
+
+    /* Layout Dimensions */
+    width: 317px;
+    /* Leave a little breathing margin so the image peaks around the side */
+    box-sizing: border-box;
+    z-index: 2;
+    /* Pushes the card visually in front of the image element */
+
+    /* The Magic Move: Emulates the Figma negative gap specification */
+    margin-top: -96px;
+    flex-grow: 1;
+        /* Forces the white box to stretch down to match its neighbors */
+    justify-content: space-between;
+        /* Pushes the "Readmore" link down to the absolute bottom of every card uniformly */
+
+    /* Decoration Styling */
+    border-radius: 8px;
+    background: #F5F7FA;
+    /* var(--Neutral-Silver) */
+    box-shadow: 0 8px 16px 0 rgba(171, 190, 209, 0.40);
+}
+
+/* Card Main Title Header */
+.community-updates__card-title {
+    width: 285px;
+    max-width: 100%;
+    /* Safety fallback to ensure text flows on tight viewports */
+    text-align: center;
+    color: #717171;
+    /* var(--Neutral-Grey) */
+
+    /* Typography Specifications */
+    font-family: 'Inter', sans-serif;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 28px;
+    margin: 0;
+    /* Erases raw browser title spacing issues */
+}
+
+/* Card Interactive Action Link */
+.community-updates__link {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    padding: 8px;
+    align-self: stretch;
+
+    /* Layout Reset Rules */
+    text-decoration: none;
+    cursor: pointer;
+    box-sizing: border-box;
+}
+
+/* Action Link Label Typography */
+.community-updates__link-label {
+    color: #4CAF4F;
+    /* var(--Brand-Primary) */
+
+    /* Typography Specifications */
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 28px;
+    transition: color 0.2s ease-in-out;
+}
+
+/* Card Link Arrow Graphic */
+.community-updates__arrow {
+    width: 24px;
+    height: 24px;
+
+    /* Layout Configurations */
+    display: block;
+    object-fit: contain;
+    /* Prevents PNG vector distortion inside its bounding box */
+    flex-shrink: 0;
+    /* Safety filter to stop the icon from squishing on tiny frames */
+}
+
+/* Interactive Hover State */
+.community-updates__link:hover .community-updates__link-label {
+    color: #3E8E41;
+    /* A rich, darker variant of your primary brand green */
+}
+
+/* Dims the arrow graphic slightly on hover to match the text shift */
+.community-updates__link:hover .community-updates__arrow {
+    filter: brightness(0.85);
+    transition: filter 0.2s ease-in-out;
+}
+
+/* ==========================================================================
+   MAIN FOOTER MASTER CONTAINER
+   ========================================================================== */
+.main-footer {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    /* Allows full-width background color zones inside */
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* 1. Full-Width Background Wrapper Component */
+.main-footer__cta {
+    width: 100%;
+    background: #F5F7FA;
+    /* var(--Neutral-Silver) */
+    box-sizing: border-box;
+}
+
+/* 2. Centered Grid Content Alignment Frame */
+.main-footer__cta-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+
+    /* Layout Dimensions */
+    width: 1440px;
+    max-width: 100%;
+    padding: 32px 150px;
+    /* Updated to your exact 150px layout specifications */
+    box-sizing: border-box;
+}
+
+/* CTA Headline Specification */
+.main-footer__cta-title {
+    width: 887px;
+    max-width: 100%;
+    /* Safety fluid fallback filter for smaller viewports */
+    color: #263238;
+    /* var(--Neutral-Black) */
+    text-align: center;
+
+    /* Typography Style Specifications */
+    font-family: 'Inter', sans-serif;
+    font-size: 64px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 76px;
+    /* ~118.75% */
+}
+
+/* CTA Green Action Button */
+.main-footer__cta-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    padding: 14px 32px;
+
+    /* Presentation & Branding */
+    background: #4CAF4F;
+    /* var(--Brand-Primary) */
+    border-radius: 4px;
+
+    /* Layout Reset Rules */
+    text-decoration: none;
+    cursor: pointer;
+    box-sizing: border-box;
+    border: none;
+    transition: background-color 0.2s ease-in-out;
+}
+
+/* Hover effect to keep the link behaviors consistent with your other primary buttons */
+.main-footer__cta-btn:hover {
+    background-color: #3E8E41;
+    /* Deeper brand green variant */
+}
+
+/* CTA Button Text Label */
+.main-footer__cta-btn-label {
+    color: #FFFFFF;
+    /* var(--Neutral-White) */
+    text-align: center;
+
+    /* Typography Specifications */
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 24px;
+    /* 150% */
+}
+
+/* CTA Button Arrow Icon */
+.main-footer__cta-btn-arrow {
+    width: 16px;
+    height: 16px;
+
+    /* Layout Configurations */
+    display: block;
+    object-fit: contain;
+    /* Keeps the PNG asset crisp and non-distorted */
+    flex-shrink: 0;
+    /* Prevents the icon from squeezing on narrow viewports */
+}
+
+/* 1. Full-Width Dark Background Wrapper */
+.main-footer__bottom {
+    width: 100%;
+    background: #263238;
+    /* var(--Neutral-Black) */
+    box-sizing: border-box;
+}
+
+/* 2. Centered Grid Content Alignment Frame */
+.main-footer__bottom-container {
+    display: flex;
+    align-items: flex-start;
+    gap: 125px;
+
+    /* Layout Dimensions */
+    width: 1440px;
+    max-width: 100%;
+    padding: 64px 165px;
+    /* Your exact 165px side layout specifications */
+    box-sizing: border-box;
+}
+
+/* Column 1: Company Info Base Layout */
+.main-footer__company-info {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 40px;
+
+    /* Layout Configurations */
+    flex-shrink: 0;
+    /* Prevents the logo block from compressing when screen shrinks */
+}
+
+/* Logo Link Wrapper Component */
+.main-footer__logo {
+    display: flex;
+    align-items: center;
+    gap: 9.891px;
+
+    /* Presentation Reset Rules */
+    text-decoration: none;
+    display: inline-flex;
+    /* Ensures the click state wraps tight around both assets */
+}
+
+/* Individual Asset Configurations */
+.main-footer__logo-icon,
+.main-footer__logo-text {
+    display: block;
+    max-width: 100%;
+    height: auto;
+    /* Keeps your branding graphics crisp and undistorted */
+}
+
+/* Logo Icon Geometric Dimension Constraints */
+.main-footer__logo-icon {
+    width: 43.271px;
+    height: 29.672px;
+
+    /* Layout Properties */
+    display: block;
+    object-fit: contain;
+    /* Prevents the image from stretching out of proportion */
+}
+
+/* Logo Text Wordmark Asset Constraints */
+.main-footer__logo-text {
+    width: 137.838px;
+    height: 25.545px;
+
+    /* Layout Properties */
+    display: block;
+    object-fit: contain;
+    /* Prevents any stretching or distortion of the typography */
+}
+
+/* Copyright Content Wrapper */
+.main-footer__copyright {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+
+}
+
+/* Copyright Legal Text Block */
+.main-footer__copyright-text {
+    width: 350px;
+    max-width: 100%;
+    /* Ensures layout safety on smaller screens */
+    color: #F5F7FA;
+    /* var(--Neutral-Silver) */
+
+    /* Typography Specifications */
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 20px;
+    /* 142.857% */
+
+    /* Document Layout Reset */
+    margin: 0;
+}
+
+/* Copyright Subtext Block */
+.main-footer__copyright-subtext {
+    width: 350px;
+    max-width: 100%;
+    /* Ensures layout safety on narrow viewports */
+    color: #F5F7FA;
+    /* var(--Neutral-Silver) */
+
+    /* Typography Specifications */
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 20px;
+    /* 142.857% */
+
+    /* Document Layout Reset */
+    margin: 0;
+}
+
+/* Social Media Links Horizontal Track */
+.main-footer__social-links {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+
+    /* Document Layout Defaults */
+    list-style: none;
+    /* Just in case this becomes a <ul> list later */
+    padding: 0;
+    margin: 0;
+}
+
+/* Individual Social Link Target Frame */
+.main-footer__social-icon {
+    width: 32px;
+    height: 32px;
+    display: inline-block;
+    /* Preserves your exact geometric dimensions */
+
+    /* Smooth Transition Setup */
+    transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+/* Interaction Hover States */
+.main-footer__social-icon:hover {
+    opacity: 0.85;
+    transform: translateY(-2px);
+    /* Subtle lift on mouse hover */
+}
+
+/* Internal Graphic Reset */
+.main-footer__social-icon img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: contain;
+    /* Ensures the icon scales perfectly within the 32px box */
+}
+
+/* Navigation Columns Layout Frame */
+.main-footer__links-grid {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 40px;
+    width: 100%;
+
+    /* Layout Logic */
+    flex-grow: 1;
+    /* Allows the link categories block to claim remaining available space */
+}
+
+/* Navigation Category Column Component */
+.main-footer__links-col {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 30px;
+
+    /* Layout Dimensions */
+    min-width: 160px;
+    /* Standard safety width to prevent column text from squishing */
+}
+
+/* Navigation Column Title Heading */
+.main-footer__links-title {
+    width: 160px;
+    color: #FFFFFF;
+    /* var(--Neutral-White) */
+
+    /* Typography Specifications */
+    font-family: 'Inter', sans-serif;
+    font-size: 22px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 28px;
+    /* 140% */
+
+    /* Document Layout Reset */
+    margin: 0;
+}
+
+/* Navigation Links Unordered List Track */
+.main-footer__links-list {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+
+    /* Browser Reset Rules */
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+/* Navigation Anchor Link Component */
+.main-footer__link {
+    width: 160px;
+    color: #F5F7FA;
+    /* var(--Neutral-Silver) */
+
+    /* Typography Specifications */
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 20px;
+    /* 142.857% */
+
+    /* Presentation & Interaction Logic */
+    display: block;
+    text-decoration: none;
+    /* Removes default browser underlines */
+    transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+/* Link Interaction State */
+.main-footer__link:hover {
+    opacity: 0.85;
+    transform: translateX(4px);
+    /* Creates a subtle indent effect on hover */
+}
+
+/* Newsletter Form Wrapper Framework */
+.main-footer__newsletter-form {
+    width: 255px;
+    height: 40px;
+
+    /* Layout Axis Alignment */
+    display: flex;
+    align-items: center;
+    position: relative;
+    /* Keeps the internal absolute send icon safely positioned inside */
+    box-sizing: border-box;
+}
+
+/* Input Field Background & Layout Container */
+.main-footer__input-wrapper {
+    width: 255px;
+    height: 40px;
+    border-radius: 8px;
+
+    /* Translates opacity: 0.2 + white fill safely so text stays 100% visible */
+    background: rgba(255, 255, 255, 0.2);
+
+    /* Layout properties to align internal elements */
+    display: flex;
+    align-items: center;
+    position: relative;
+    box-sizing: border-box;
+}
+
+/* Newsletter Email Input Element */
+.main-footer__input {
+    width: 100%;
+    height: 100%;
+    padding: 0 40px 0 12px;
+    /* Leaves room on the right side so text doesn't overlap the send icon */
+    background: transparent;
+    border: none;
+    outline: none;
+    box-sizing: border-box;
+
+    /* Typography for Active User Text */
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 20px;
+    /* 142.857% */
+    color: #FFFFFF;
+    /* Text turns white when typing for optimal contrast */
+}
+
+/* Typography for Placeholder Text State */
+.main-footer__input::placeholder {
+    color: #D9DBE1;
+    /* var(--Text-Gray-300) */
+    opacity: 1;
+    /* Overrides default browser transparency on placeholders */
+}
+
+/* Newsletter Submit Button */
+.main-footer__input-btn {
+    width: 18px;
+    height: 18px;
+
+    /* Absolute Layout Positioning */
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    /* Perfectly centers vertically */
+
+    /* Browser Reset Rules */
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+
+    /* Layout Axis Alignment */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    /* Interaction Setup */
+    transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+/* Interaction States */
+.main-footer__input-btn:hover {
+    opacity: 0.8;
+    transform: translateY(-50%) scale(1.15);
+    /* Slight pop when hovered */
+}
+
+/* Ensure child SVG behaves nicely inside the frame */
+.main-footer__input-btn svg {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+/* The Main Container Track */
+.main-footer__links-grid {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 40px;
+    flex-grow: 1;
+    width: 100%;
+}
+
+/* Individual Navigation Columns (Company, Support, and Stay Up To Date) */
+.main-footer__links-col,
+.main-footer__newsletter-col {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    /* FIX: Forces headers and links to align to the left side uniformly */
+    gap: 24px;
+    /* FIX: Creates an exact uniform vertical gap below the titles */
+    flex: 1;
+    min-width: 200px;
+    /* Keeps columns from crushing into each other */
+}
+
+/* Specific constraint for newsletter to match input sizing */
+.main-footer__newsletter-col {
+    max-width: 255px;
+}
+
+/* Headings Unification */
+.main-footer__links-title,
+.main-footer__newsletter-title {
+    color: #FFFFFF;
+    font-family: 'Inter', sans-serif;
+    font-size: 22px;
+    font-weight: 600;
+    line-height: 28px;
+    margin: 0;
+    text-align: left;
+}
+
+/* Links List Structure */
+.main-footer__links-list {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    /* FIX: Keeps anchor elements neatly stacked to the left */
+    gap: 12px;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+}
+
+/* Anchor Targets */
+.main-footer__link {
+    color: #F5F7FA;
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 20px;
+    text-decoration: none;
+    text-align: left;
+    display: block;
+    width: 100%;
+    transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.main-footer__link:hover {
+    opacity: 0.85;
+    transform: translateX(4px);
+}
+
+/* ==========================================================================
+   INPUT COMPONENTS
+   ========================================================================== */
+.main-footer__newsletter-form {
+    width: 100%;
+    margin: 0;
+}
+
+.main-footer__input-wrapper {
+    width: 100%;
+    height: 40px;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.2);
+    display: flex;
+    align-items: center;
+    position: relative;
+    box-sizing: border-box;
+}
+
+.main-footer__input {
+    width: 100%;
+    height: 100%;
+    padding: 0 40px 0 12px;
+    background: transparent;
+    border: none;
+    outline: none;
+    box-sizing: border-box;
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    color: #FFFFFF;
+}
+
+.main-footer__input::placeholder {
+    color: #D9DBE1;
+    opacity: 1;
+}
+
+.main-footer__input-btn {
+    width: 18px;
+    height: 18px;
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+
+
+.calendar__title {
+    text-align: center !important;
+
+    /* FIX: Force the browser to balance lines and avoid isolated trailing words */
+    text-wrap: balance !important;
+
+    /* Fallback safety rules for older browser rendering engines */
+    max-width: 100% !important;
+    word-wrap: break-word !important;
+}
+
+
+
+
+
+
+
+
+
+
+
+/* ==========================================================================
+   NAVBAR RESPONSIVE LAYER (Desktop-First)
+   ========================================================================== */
+
+/* 1. Large Screen Adjustments (Screens under 1250px) */
+@media (max-width: 1250px) {
+    .container {
+        /* Scale down the massive padding step-by-step */
+        padding: 0 60px;
+    }
+}
+
+/* 2. Laptop & Tablet Breakpoint (Screens under 1024px) */
+@media (max-width: 1024px) {
+    .container {
+        padding: 0 32px;
+        /* Bring content closer to edges safely */
+    }
+
+    /* 2. Show the hamburger menu icon wrapper */
+    .navbar__toggle {
+        display: flex !important;
+    }
+
+    /* 3. Reconfigure the menu link array into a distinct dropdown drawer card */
+    .navbar .navbar__menu {
+        display: flex !important;
+        /* Force flex engine back on */
+        flex-direction: column !important;
+        position: absolute !important;
+        top: 84px;
+        /* Drops directly below the header threshold line */
+        left: 0;
+        width: 100%;
+        background-color: #F5F7FA !important;
+        /* Forces solid silver frame */
+        padding: 30px 0 !important;
+        gap: 24px !important;
+        box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+        z-index: 9999;
+        /* Positions it over background hero graphics */
+
+        /* Default hidden physical boundary layer state */
+        opacity: 0 !important;
+        visibility: hidden !important;
+        transform: translateY(-15px);
+        transition: opacity 0.25s ease, transform 0.25s ease, visibility 0.25s ease;
+    }
+
+    /* 4. THE FIX: The exact combo state when JS adds the 'is-active' class */
+    .navbar .navbar__menu.is-active {
+        opacity: 1 !important;
+        visibility: visible !important;
+        transform: translateY(0) !important;
+    }
+
+    /* 5. Clean up individual list spacing item alignments */
+    .navbar__item {
+        width: 100%;
+        justify-content: center;
+    }
+
+    /* 6. Hide action links entirely on small frames to prevent cramming */
+    .navbar__actions {
+        display: none !important;
+    }
+
+    .navbar__logo-icon {
+        height: 18px !important;
+    }
+    
+}
+
+/* ==========================================================================
+   UPDATED MOBILE NAVBAR OVERRIDE (Screens under 850px)
+   ========================================================================== */
+@media (max-width: 850px) {
+
+    /* 1. Ensure the container layout has structural positioning context */
+    .container {
+        padding: 0 30px;
+        position: relative;
+    }
+
+    /* 2. Show the hamburger menu icon wrapper */
+    .navbar__toggle {
+        display: flex !important;
+    }
+
+    /* 3. Reconfigure the menu link array into a distinct dropdown drawer card */
+    .navbar .navbar__menu {
+        display: flex !important;
+        /* Force flex engine back on */
+        flex-direction: column !important;
+        position: absolute !important;
+        top: 84px;
+        /* Drops directly below the header threshold line */
+        left: 0;
+        width: 100%;
+        background-color: #F5F7FA !important;
+        /* Forces solid silver frame */
+        padding: 30px 0 !important;
+        gap: 24px !important;
+        box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+        z-index: 9999;
+        /* Positions it over background hero graphics */
+
+        /* Default hidden physical boundary layer state */
+        opacity: 0 !important;
+        visibility: hidden !important;
+        transform: translateY(-15px);
+        transition: opacity 0.25s ease, transform 0.25s ease, visibility 0.25s ease;
+    }
+
+    /* 4. THE FIX: The exact combo state when JS adds the 'is-active' class */
+    .navbar .navbar__menu.is-active {
+        opacity: 1 !important;
+        visibility: visible !important;
+        transform: translateY(0) !important;
+    }
+
+    /* 5. Clean up individual list spacing item alignments */
+    .navbar__item {
+        width: 100%;
+        justify-content: center;
+    }
+
+    /* 6. Hide action links entirely on small frames to prevent cramming */
+    .navbar__actions {
+        display: none !important;
+    }
+
+    .navbar__logo-icon{
+        height: 18px !important;
+    }
+}
+
+
+
+/* ==========================================================================
+   HERO SECTION RESPONSIVE LAYER (Desktop-First)
+   ========================================================================== */
+
+/* 1. Laptop & Mid-Size Screens Breakpoint (Screens under 1200px) */
+@media (max-width: 1200px) {
+    .hero__layout-wrapper {
+        /* Reduce the massive desktop gap and bring padding down slightly */
+        gap: 40px;
+        padding: 80px 24px;
+    }
+
+    .hero__title {
+        /* Drop font size down so it doesn't clip or look too overwhelming */
+        font-size: 48px;
+        line-height: 58px;
+    }
+}
+
+/* 2. Tablet Layout Breakpoint (Screens under 992px) */
+@media (max-width: 992px) {
+    .hero__layout-wrapper {
+        /* Flip the text block below the illustration graphic cleanly */
+        flex-direction: column-reverse;
+        text-align: center;
+        gap: 48px;
+        padding: 60px 24px;
+    }
+
+    .hero__left-branch {
+        /* IMPORTANT: Remove the rigid desktop width restriction so it can shrink */
+        min-width: 0 !important;
+        align-items: center;
+        /* Center align headings and buttons globally on tablet */
+        width: 100%;
+        max-width: 600px;
+        /* Keep text clean and readable */
+    }
+
+    .hero__text-group {
+        align-items: center;
+        /* Center heading and subtitle blocks internally */
+    }
+}
+
+/* 3. Mobile Phone Breakpoint (Screens under 576px) */
+@media (max-width: 576px) {
+    .hero__layout-wrapper {
+        padding: 48px 16px 64px 16px;
+        /* Tighten spaces for mobile real estate */
+        gap: 32px;
+    }
+
+    .hero__title {
+        font-size: 32px;
+        line-height: 40px;
+    }
+
+    .hero__subtitle {
+        font-size: 14px;
+        line-height: 22px;
+    }
+
+    .hero__right-branch {
+        /* Make the graphic wrap fluidly adapt down inside phone margins */
+        width: 100%;
+        max-width: 280px;
+        height: auto;
+        aspect-ratio: 391 / 407;
+        /* Preserves the original figma ratio layout */
+    }
+}
+
+
+
+
+
+/* ==========================================================================
+   CLIENTS SECTION RESPONSIVE LAYER (Desktop-First)
+   ========================================================================== */
+
+/* 1. Laptop & Mid-Size Screens Breakpoint (Screens under 1200px) */
+@media (max-width: 1200px) {
+    .clients {
+        padding: 0 40px;
+        /* Cuts back the 150px padding block */
+    }
+
+    .clients__logos {
+        /* FIX: Change space-between to center so wrapped items stay beautifully balanced */
+        justify-content: center;
+        gap: 40px;
+        /* Evenly distributes breathing space around the logo array */
+    }
+}
+
+/* 2. Tablet Layout Breakpoint (Screens under 768px) */
+@media (max-width: 768px) {
+    .clients {
+        padding: 0 24px;
+        gap: 24px;
+        /* Increases spacing between text block and logos */
+    }
+
+    .clients__title {
+        font-size: 28px;
+        line-height: 36px;
+    }
+
+    .clients__logos {
+        /* FIX: Shift layout from Flex to Grid */
+        display: grid !important;
+
+        /* FIX: Force exactly 4 equal columns on top row */
+        grid-template-columns: repeat(4, 1fr);
+
+        /* Auto-adjusts height based on row contents */
+        height: auto !important;
+        gap: 32px 24px;
+        /* 32px vertical row spacing, 24px horizontal column gap */
+
+        /* Centers all logo items neatly within their grid cells */
+        justify-items: center;
+        align-items: center;
+        width: 100%;
+    }
+
+    /* Keep logo elements reasonably proportioned on tablet devices */
+    .clients__logo-img {
+        max-height: 40px;
+    }
+}
+
+/* 3. Mobile Phone Breakpoint (Screens under 480px) */
+@media (max-width: 480px) {
+    .clients {
+        padding: 0 16px;
+    }
+
+    .clients__title {
+        font-size: 24px;
+        line-height: 32px;
+    }
+
+    .clients__logos {
+        /* On narrow phone screens, 4 columns get too squished. 
+            This snaps them into a clean 2x4 grid layout instead! */
+        grid-template-columns: repeat(2, 1fr);
+        gap: 24px 16px;
+    }
+}
+
+
+
+
+
+
+/* ==========================================================================
+   COMMUNITY SECTION RESPONSIVE LAYER (Desktop-First)
+   ========================================================================== */
+
+/* 1. Laptop & Tablet Adjustments (Screens under 1200px) */
+@media (max-width: 1200px) {
+    .community {
+        padding: 0 40px;
+        /* Cut back the 150px outer desktop padding */
+        gap: 40px;
+        /* Pull text group closer to cards slightly */
+    }
+
+    .community__cards-container {
+        gap: 24px;
+        /* Tighten spaces between individual cards */
+    }
+
+    .community__card {
+        /* FIX: Remove the hard shrink lock so cards can breathe */
+        flex-shrink: 1;
+        /* Allow cards to dynamically occupy space up to 300px width */
+        width: 100%;
+        max-width: 300px;
+        padding: 24px;
+        /* Use more compressed padding */
+    }
+}
+
+/* 2. Small Tablet Viewport Breakpoint (Screens under 768px) */
+@media (max-width: 768px) {
+    .community {
+        padding: 0 24px;
+    }
+
+    .community__title {
+        font-size: 28px;
+        line-height: 36px;
+        max-width: 100%;
+        /* Allow full width text flow instead of Figma limits */
+    }
+
+    .community__card-title {
+        font-size: 24px;
+        line-height: 32px;
+    }
+}
+
+/* 3. Mobile Phones Breakpoint (Screens under 640px) */
+@media (max-width: 640px) {
+    .community {
+        padding: 0 16px;
+        gap: 32px;
+    }
+
+    /* Force cards into a neat, beautifully centered vertical single-column stack */
+    .community__cards-container {
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+    }
+
+    .community__card {
+        max-width: 340px;
+        /* Give cards a slightly wider frame for phone readability */
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ==========================================================================
+   BODY CONTAINER & UNLOCK SECTION RESPONSIVE LAYER (Desktop-First)
+   ========================================================================== */
+
+/* 1. Laptop Adjustments (Screens under 1200px) */
+@media (max-width: 1200px) {
+    .body-container {
+        gap: 50px;
+        /* Bring major content section blocks slightly closer */
+        padding-top: 60px;
+        margin-bottom: 60px;
+    }
+
+    .unlock__container {
+        padding: 0 40px;
+        /* Give side breathing room on fluid viewports */
+        gap: 40px;
+        /* Establish a stable safe gap between text and image columns */
+    }
+}
+
+/* 2. Tablet Layout Overhaul (Screens under 992px) */
+@media (max-width: 992px) {
+    .unlock__container {
+        /* Flip the text block cleanly beneath the graphic layout block */
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: 32px;
+        padding: 0 24px;
+    }
+
+    .unlock__content,
+    .unlock__text-group {
+        align-items: center;
+        /* Center-align header text, paragraphs, and CTAs */
+    }
+
+    .unlock__description {
+        text-align: center;
+        /* Change justify to center for cleaner readability on tablets */
+    }
+}
+
+/* 3. Mobile Phone Optimization (Screens under 576px) */
+@media (max-width: 576px) {
+    .body-container {
+        gap: 40px;
+        padding-top: 40px;
+        margin-bottom: 40px;
+    }
+
+    .unlock__container {
+        padding: 0 16px;
+    }
+
+    .unlock__title {
+        font-size: 28px;
+        line-height: 36px;
+    }
+
+    /* FIX: Force the layout container framework and internal image wrapper to scale fluidly */
+    .unlock__image-wrapper {
+        width: 100%;
+        max-width: 320px;
+        height: auto;
+        padding: 20px 0;
+    }
+
+    /* FIX: Permit the image asset itself to scale dynamically with the screen container */
+    .unlock__img {
+        width: 100%;
+        height: auto;
+        max-width: 280px;
+        /* Keep frame looking sharp and appropriately sized */
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ==========================================================================
+   ACHIEVEMENTS SECTION RESPONSIVE LAYER (Desktop-First)
+   ========================================================================== */
+
+/* 1. Laptop Adjustments (Screens under 1200px) */
+@media (max-width: 1200px) {
+    .achievements__container {
+        padding: 64px 40px;
+        /* Cuts back the 150px layout container padding */
+        gap: 40px;
+    }
+
+    .achievements__row {
+        gap: 60px;
+        /* Greatly reduces the massive 150px gap between stat cards */
+    }
+
+    .achievements__heading-wrapper {
+        flex-shrink: 1;
+        /* Allows the title block to shrink gracefully */
+    }
+
+    .achievements__counts {
+        flex-shrink: 1;
+        /* Allows the grid counts container to shrink */
+    }
+}
+
+/* 2. Tablet Layout Reflow (Screens under 992px) */
+@media (max-width: 992px) {
+    .achievements__container {
+        /* Stack the text heading block directly over the stat numbers */
+        flex-direction: column;
+        text-align: center;
+        gap: 48px;
+        padding: 48px 24px;
+    }
+
+    .achievements__heading-wrapper {
+        align-items: center;
+        max-width: 100%;
+    }
+
+    .achievements__text-group {
+        align-items: center;
+    }
+
+    .achievements__title {
+        max-width: 100%;
+    }
+
+    .achievements__row {
+        gap: 40px;
+        /* Re-adjusts grid spaces for balanced columns */
+        justify-content: center;
+    }
+}
+
+/* 3. Mobile Phones Breakpoint (Screens under 576px) */
+@media (max-width: 576px) {
+    .achievements__container {
+        padding: 40px 16px;
+    }
+
+    .achievements__title {
+        font-size: 28px;
+        line-height: 36px;
+    }
+
+    /* Convert the horizontal stats rows into a clean 2x2 grid framework */
+    .achievements__counts {
+        width: 100%;
+    }
+
+    .achievements__row {
+        flex-wrap: wrap;
+        /* Permits individual metrics to wrap on tiny phone screens */
+        gap: 32px 16px;
+    }
+
+    .achievements__item {
+        min-width: calc(50% - 16px);
+        /* Keeps exactly 2 items side-by-side on mobile */
+        justify-content: center;
+        /* Centers metrics beautifully within their mobile frames */
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ==========================================================================
+   CALENDAR SECTION RESPONSIVE LAYER (Desktop-First)
+   ========================================================================== */
+
+/* 1. Laptop Adjustments (Screens under 1200px) */
+@media (max-width: 1200px) {
+    .calendar__container {
+        padding: 0 40px;
+        /* Slashes the 150px padding block */
+        gap: 40px;
+        /* Establishes a comfortable space between columns */
+    }
+}
+
+/* 2. Tablet Layout Reflow (Screens under 992px) */
+@media (max-width: 992px) {
+    .calendar__container {
+        /* Flips layout so the image sits cleanly on top of the text */
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: 32px;
+        padding: 0 24px;
+    }
+
+    .calendar__content,
+    .calendar__text-group {
+        align-items: center;
+        /* Center-aligns all headers and body tags */
+    }
+
+    .calendar__description {
+        text-align: center;
+        /* Drops the justified text layout for centered tablet look */
+    }
+}
+
+/* 3. Mobile Phone Optimization (Screens under 576px) */
+@media (max-width: 576px) {
+    .calendar__container {
+        padding: 0 16px;
+    }
+
+    .calendar__title {
+        font-size: 28px;
+        line-height: 36px;
+    }
+
+    /* FIX: Unlocks the rigid layout dimensions of the graphic column wrapper */
+    .calendar__image-wrapper {
+        width: 100%;
+        max-width: 320px;
+        height: auto;
+        aspect-ratio: 442 / 434;
+        /* Preserves pristine figma aspect ratio constraints */
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ==========================================================================
+   CUSTOMERS SECTION RESPONSIVE LAYER (Desktop-First)
+   ========================================================================== */
+
+/* 1. Large Tablet Optimization (Screens under 1200px) */
+@media (max-width: 1200px) {
+    .customers__container {
+        padding: 40px;
+        /* Cut back the 150px outer margins safely */
+        gap: 40px;
+        /* Tighten up the gap between the image and the text content */
+    }
+
+    .customers__logos {
+        gap: 24px;
+        /* Pull individual corporate logos closer together */
+    }
+}
+
+/* 2. Mid-Size Tablet Reflow (Screens under 992px) */
+@media (max-width: 992px) {
+    .customers__container {
+        flex-direction: column;
+        /* Stacks avatar directly over your quote block */
+        align-items: center;
+        text-align: center;
+        gap: 32px;
+    }
+
+    .customers__content,
+    .customers__author-meta {
+        align-items: center;
+        /* Center-align name and titles */
+    }
+
+    .customers__quote {
+        text-align: center;
+        /* Ditch justified text layout for centered presentation */
+    }
+
+    .customers__footer-row {
+        flex-direction: column;
+        /* Stack the logos row directly on top of the text link button */
+        gap: 24px;
+        align-items: center;
+    }
+
+    .customers__link {
+        margin-left: 0;
+        /* Clear out the desktop far-right alignment trick */
+    }
+}
+
+/* 3. Small Mobile Phone Optimization (Screens under 600px) */
+@media (max-width: 600px) {
+    .customers__container {
+        padding: 32px 16px;
+    }
+
+    /* FIX: Force the square avatar frame to adapt downward to fit phone glass safely */
+    .customers__image-wrapper {
+        width: 100%;
+        max-width: 240px;
+        height: auto;
+        aspect-ratio: 1 / 1;
+        /* Maintains perfect 1:1 box layout square profiles */
+    }
+
+    /* FIX: Allow logos to break columns into multiple decks instead of clipping */
+    .customers__logos {
+        flex-wrap: wrap !important;
+        justify-content: center;
+        gap: 16px;
+        /* Create tight spacing matrix */
+    }
+
+    /* Standardized small-scale logo containers for narrow viewports */
+    .customers__logos [class^="customers__logo-"] {
+        padding: 6px 12px !important;
+        height: 40px !important;
+    }
+
+    .customers__logos [class^="customers__logo-"] img {
+        height: 100%;
+        width: auto;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ==========================================================================
+   COMMUNITY UPDATES SECTION RESPONSIVE LAYER (Desktop-First)
+   ========================================================================== */
+
+/* 1. Small Desktop & Laptop Adjustments (Screens under 1200px) */
+@media (max-width: 1200px) {
+    .community-updates {
+        padding: 0 40px;
+        /* Cut back outer bounding padding safely */
+    }
+
+    .community-updates__grid {
+        padding: 0;
+        /* Remove double padding layer to unlock maximum card room */
+        gap: 20px;
+    }
+
+    /* FIX: Unshackle fixed widths and switch to fluid percentage math */
+    .community-updates__image-wrapper {
+        width: 100%;
+        height: auto;
+        aspect-ratio: 368 / 286;
+        /* Holds original figma frame scaling perfectly */
+    }
+
+    .community-updates__content {
+        width: 85%;
+        /* Let the white text box dynamically float inside its image boundary */
+        margin-top: -64px;
+        /* Slightly reduce overlap depth so it doesn't mask small image viewports */
+    }
+}
+
+/* 2. Tablet Layout Reflow (Screens under 992px) */
+@media (max-width: 992px) {
+    .community-updates__grid {
+        flex-direction: column;
+        /* Stack blog cards vertically */
+        align-items: center;
+        gap: 96px;
+        /* High gap accounts for the space eaten by the hanging card elements */
+    }
+
+    .community-updates__card {
+        width: 100%;
+        max-width: 400px;
+        /* Constrain vertical mobile stacks so they don't look awkwardly wide */
+    }
+
+    .community-updates__content {
+        width: 88%;
+        margin-top: -80px;
+        /* Re-intensify overlap safely now that cards sit vertically */
+    }
+}
+
+/* 3. Mobile Phone Optimization (Screens under 576px) */
+@media (max-width: 576px) {
+    .community-updates {
+        padding: 0 16px;
+    }
+
+    .community-updates__title {
+        font-size: 28px;
+        line-height: 36px;
+    }
+
+    .community-updates__grid {
+        gap: 80px;
+    }
+
+    .community-updates__card-title {
+        font-size: 18px;
+        line-height: 26px;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ==========================================================================
+   MAIN FOOTER RESPONSIVE LAYER (Desktop-First)
+   ========================================================================== */
+
+/* 1. Large Laptop & Tablet Adjustments (Screens under 1200px) */
+@media (max-width: 1200px) {
+    .main-footer__cta-container {
+        padding: 40px 24px;
+    }
+
+    .main-footer__cta-title {
+        font-size: 44px;
+        line-height: 52px;
+    }
+
+    .main-footer__bottom-container {
+        padding: 48px 40px;
+        gap: 48px;
+        /* Reduces the massive 125px gap significantly */
+    }
+}
+
+/* 2. Mid-Size Tablet Reflow (Screens under 992px) */
+@media (max-width: 992px) {
+
+    /* Reflow Bottom Layout Columns */
+    .main-footer__bottom-container {
+        flex-direction: column;
+        /* Stack company info, links, and forms vertically */
+        align-items: center;
+        text-align: center;
+        gap: 40px;
+    }
+
+    .main-footer__company-info,
+    .main-footer__logo,
+    .main-footer__links-col {
+        align-items: center;
+        /* Center align all corporate links and lists */
+    }
+
+    .main-footer__links-grid {
+        width: 100%;
+        justify-content: space-around;
+        /* Space out nav buckets evenly across the view */
+    }
+
+    .main-footer__copyright-text,
+    .main-footer__copyright-subtext {
+        text-align: center;
+    }
+}
+
+/* 3. Small Mobile Phone Optimization (Screens under 576px) */
+@media (max-width: 576px) {
+    .main-footer__cta-container {
+        padding: 32px 16px;
+    }
+
+    /* FIX: Drastically scale down giant typographic headings */
+    .main-footer__cta-title {
+        font-size: 28px;
+        line-height: 36px;
+    }
+
+    .main-footer__cta-btn {
+        width: 100%;
+        /* Make CTA link touch-friendly and full-width on mobile glass */
+        max-width: 280px;
+    }
+
+    .main-footer__bottom-container {
+        padding: 40px 16px;
+    }
+
+    /* FIX: Convert layout links from columns into vertical decks to prevent screen clipping */
+    .main-footer__links-grid {
+        flex-direction: column;
+        align-items: center;
+        gap: 32px;
+    }
+
+    .main-footer__links-col,
+    .main-footer__links-title,
+    .main-footer__link {
+        width: 100%;
+        text-align: center;
+        /* Center-align all text fields */
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+@media (max-width: 992px) {
+    .main-footer__links-grid {
+        flex-direction: column;
+        align-items: center;
+        gap: 48px;
+    }
+
+    /* On mobile, turning layout components into centered items looks balanced */
+    .main-footer__links-col,
+    .main-footer__newsletter-col,
+    .main-footer__links-list {
+        align-items: center;
+        text-align: center;
+        max-width: 100%;
+    }
+
+    .main-footer__links-title,
+    .main-footer__newsletter-title,
+    .main-footer__link {
+        text-align: center;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ==========================================================================
+   MASTER RESPONISIVE SYSTEM: ALL DEVICES PROPORTIONAL SCALE-DOWN
+   ========================================================================== */
+
+/* GLOBAL COMPONENT SCALE: Applies to all responsive viewports */
+@media (max-width: 1200px) {
+
+    /* 1. Universal Proportional Scaling (Gaps, Padding, Containers) */
+    [class*="__container"],
+    .community-updates,
+    .main-footer__cta-container,
+    .main-footer__bottom-container {
+        padding: clamp(32px, 5vw, 56px) clamp(20px, 4vw, 40px) !important;
+        /* Increases structural breathing room safely */
+        max-width: 100% !important;
+    }
+
+    [class*="__grid"],
+    .main-footer__bottom-container {
+        gap: clamp(24px, 4vw, 48px) !important;
+        /* Decreases gaping structural voids proportionally */
+    }
+
+    /* 2. Global Proportional Image Scale-Down */
+    [class*="__image-wrapper"] {
+        width: 100% !important;
+        max-width: clamp(220px, 30vw, 320px) !important;
+        /* Shaves roughly 15-20% off all image footprints globally */
+        height: auto !important;
+        margin: 0 auto !important;
+    }
+
+    /* Preserve aspect ratios for your unique graphics layout */
+    .calendar__image-wrapper {
+        aspect-ratio: 442 / 434 !important;
+    }
+
+    .community-updates__image-wrapper {
+        aspect-ratio: 368 / 286 !important;
+        max-width: clamp(260px, 35vw, 368px) !important;
+    }
+
+    /* 3. Global Typographic Downsizing Engine */
+    [class*="__title"],
+    .main-footer__cta-title {
+        font-size: clamp(26px, 4.5vw, 42px) !important;
+        /* Smooth scaling dynamic headline size */
+        line-height: 1.2 !important;
+    }
+
+    [class*="__card-title"] {
+        font-size: clamp(16px, 2.5vw, 20px) !important;
+        line-height: 1.3 !important;
+    }
+
+    [class*="__description"],
+    [class*="__subtitle"],
+    [class*="__quote"],
+    .main-footer__link,
+    .main-footer__copyright-text,
+    .main-footer__copyright-subtext {
+        font-size: clamp(13px, 1.8vw, 15px) !important;
+        /* Slightly lighter baseline text grid */
+        line-height: 1.5 !important;
+    }
+}
+
+/* SMARTPHONE SPECIFIC SHIFT (Screens under 768px) */
+@media (max-width: 768px) {
+
+    /* Stack layouts to prevent narrow crowding */
+    .main-footer__bottom-container,
+    .main-footer__links-grid {
+        flex-direction: column !important;
+        align-items: center !important;
+        text-align: center !important;
+        gap: 36px !important;
+    }
+
+    .main-footer__links-col,
+    .main-footer__newsletter-col,
+    .main-footer__links-list {
+        align-items: center !important;
+        width: 100% !important;
+        max-width: 100% !important;
+    }
+
+    .main-footer__links-title,
+    .main-footer__newsletter-title,
+    .main-footer__link {
+        text-align: center !important;
+    }
+
+    /* Keep the community updates card overlap looking tidy as it downscales */
+    .community-updates__content {
+        width: 90% !important;
+        margin-top: -54px !important;
+    }
+}
+
+/* ULTRA-NARROW SAFETY OVERRIDE (Samsung Fold / Screens under 340px) */
+@media (max-width: 340px) {
+
+    [class*="__container"],
+    .community-updates {
+        padding-left: 16px !important;
+        padding-right: 16px !important;
+    }
+
+    [class*="__image-wrapper"] {
+        max-width: 180px !important;
+        /* Tightens image vectors down even further so text room wins */
+    }
+
+    .main-footer__cta-btn {
+        width: 100% !important;
+        max-width: 240px !important;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+/* ==========================================================================
+   ACHIEVEMENTS SECTION FINE-TUNING & JUSTIFICATION
+   ========================================================================== */
+
+/* 1. Global Section Text Justification */
+.achievements__title,
+.achievements__subtitle,
+.achievements__description {
+    text-align: justify !important;
+    text-justify: inter-word;
+    hyphens: auto;
+}
+
+/* 2. Achievement Card Content & Grid Optimization */
+.achievements__card {
+    display: flex;
+    align-items: center;
+    /* Vertically aligns the icon perfectly with the text block */
+    gap: 16px !important;
+    /* Pulls the text and icon closer together to save horizontal space */
+}
+
+/* 3. Proportional Icon Scale-Down */
+.achievements__icon-wrapper,
+.achievements__icon {
+    width: clamp(36px, 5vw, 48px) !important;
+    /* Downsizes the icons by ~20-30% to fit narrow rows */
+    height: clamp(36px, 5vw, 48px) !important;
+    /* Keeps the geometric shape perfectly square */
+    object-fit: contain;
+    flex-shrink: 0;
+    /* Prevents the icon from being crushed when screen real estate drops */
+}
+
+/* 4. Internal Card Typography Justification */
+.achievements__card-number,
+.achievements__card-label,
+.achievements__card-text {
+    text-align: justify !important;
+    text-justify: inter-word;
+    margin: 0;
+}
+
+/* 5. Mobile Reflow Optimization for Ultra-Narrow Views */
+@media (max-width: 480px) {
+    .achievements__grid {
+        grid-template-columns: 1fr !important;
+        /* Forces cards into a clean, singular column stack */
+        gap: 20px !important;
+    }
+
+    .achievements__card {
+        justify-content: flex-start;
+        /* Ensures everything flows cleanly from the left bounding wall */
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ==========================================================================
+   TARGETED SCREEN FIXES (ALL-IN-ONE PATCH)
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   1. FIRST IMAGE FIX: Achievements Layout Overhaul (Screenshot 2026-06-20 153759.png)
+   -------------------------------------------------------------------------- */
+@media (max-width: 768px) {
+
+    /* Break the grid into a single column stack to completely stop horizontal collision overlapping */
+    .achievements__grid,
+    [class*="achievements__list"] {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        gap: 32px !important;
+        width: 100% !important;
+    }
+
+    /* Keep the individual metric cards locked into an orderly row grid layout */
+    .achievements__card {
+        display: flex !important;
+        flex-direction: row !important;
+        align-items: center !important;
+        justify-content: flex-start !important;
+        width: 100% !important;
+        max-width: 260px !important;
+        /* Bounds the content safely inside narrow mobile frame barriers */
+        gap: 20px !important;
+        margin: 0 auto !important;
+    }
+
+    /* Wrap the numerical count and metric label stack together */
+    .achievements__card-content,
+    .achievements__text-wrapper {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        text-align: left !important;
+    }
+
+    /* Ensure text elements justify correctly without breaking lines clumsily */
+    .achievements__description {
+        text-align: justify !important;
+        text-justify: inter-word;
+        width: 100% !important;
+    }
+}
+
+/* --------------------------------------------------------------------------
+   2. SECOND IMAGE FIX: Site Footer Title 2-Line Constraint (Screenshot 2026-06-20 153810.png)
+   -------------------------------------------------------------------------- */
+@media (max-width: 768px) {
+
+    /* Target the text block container and expand its inline field view constraints */
+    [class*="site-footer__header"],
+    [class*="design__content"],
+    .community-updates__header {
+        width: 100% !important;
+        max-width: 100% !important;
+        padding-left: 8px !important;
+        padding-right: 8px !important;
+        box-sizing: border-box !important;
+    }
+
+    /* Proportional micro-step reduction on the font sizes to make sure it nests neatly onto 2 lines */
+    [class*="site-footer__title"],
+    [class*="design__title"] {
+        font-size: clamp(22px, 6vw, 26px) !important;
+        line-height: 1.25 !important;
+        white-space: normal !important;
+        word-wrap: break-word !important;
+        text-align: center !important;
+        max-width: 100% !important;
+    }
+
+    /* Ensure body copy text blocks maintain their justified parameters */
+    [class*="site-footer__description"],
+    [class*="design__description"],
+    .site-footer p,
+    .design p {
+        text-align: justify !important;
+        text-justify: inter-word;
+    }
+}
+
+/* --------------------------------------------------------------------------
+   3. THIRD IMAGE FIX: Brand Clients Logo Grid 4x2 Array (Screenshot 2026-06-20 153826.png)
+   -------------------------------------------------------------------------- */
+@media (max-width: 768px) {
+
+    /* Restructure the layout track into a clean, rigid grid matrix pattern */
+    .clients__grid,
+    .clients__logos,
+    [class*="logos__container"] {
+        display: grid !important;
+        grid-template-columns: repeat(4, 1fr) !important;
+        /* Forces 4 items on top, 4 items below */
+        gap: clamp(16px, 4vw, 24px) !important;
+        /* Fluidly scales spacing so elements stay apart */
+        align-items: center !important;
+        justify-items: center !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        padding: 0 12px !important;
+        box-sizing: border-box !important;
+    }
+
+    /* Ensure brand vector graphic nodes conform cleanly to dynamic wrapper bounds */
+    .clients__logo img,
+    .clients__logos img,
+    [class*="logos__container"] img {
+        width: 100% !important;
+        max-width: clamp(45px, 12vw, 65px) !important;
+        /* Prevents logos from bleeding into neighbors */
+        height: auto !important;
+        object-fit: contain !important;
+    }
+}
+
+/* ==========================================================================
+   ACHIEVEMENTS SECTION - COMPLETE MOBILE VERTICAL STACK
+   ========================================================================== */
+
+@media (max-width: 768px) {
+
+    /* 1. Fix the description below the title (Stop justification) */
+    .achievements__description,
+    [class*="achievements__subtitle"] {
+        text-align: center !important;
+        /* Ditch justification to remove ugly text gaps */
+        text-justify: none !important;
+        hyphens: none !important;
+        width: 100% !important;
+        max-width: 280px !important;
+        /* Keep it contained nicely */
+        margin: 0 auto !important;
+    }
+
+    /* 2. Force the main grid/container into a single vertical column track */
+    .achievements__grid,
+    [class*="achievements__list"] {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        gap: 28px !important;
+        /* Uniform breathing room between stacked items */
+        width: 100% !important;
+    }
+
+    /* 3. Re-align the metric items to stack cleanly */
+    .achievements__card {
+        display: flex !important;
+        flex-direction: row !important;
+        /* Keeps icon next to text, but cards stack vertically */
+        align-items: center !important;
+        justify-content: flex-start !important;
+        width: 100% !important;
+        max-width: 220px !important;
+        /* Keeps the content tightly aligned together */
+        margin: 0 auto !important;
+        gap: 16px !important;
+    }
+
+    /* 4. Text container inside individual cards */
+    .achievements__card-content,
+    .achievements__text-wrapper {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        text-align: left !important;
+    }
+
+    /* 5. Keep numbers and labels clean and left-aligned next to their icons */
+    .achievements__card-number,
+    .achievements__card-label {
+        text-align: left !important;
+        text-justify: none !important;
+        margin: 0 !important;
+        line-height: 1.2 !important;
+    }
+
+    .achievements__card-number {
+        font-size: 24px !important;
+        /* Slightly scale down big numbers so they fit fine */
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ==========================================================================
+   ACHIEVEMENTS METRIC NUMBERS SCALE-DOWN
+   ========================================================================== */
+
+@media (max-width: 768px) {
+
+    /* Significantly step down the numeric size so long strings stay unbroken */
+    .achievements__card-number {
+        font-size: clamp(20px, 5.5vw, 24px) !important;
+        font-weight: 700 !important;
+        line-height: 28px !important;
+        letter-spacing: -0.5px !important;
+        /* Air-tight tracking keeps numbers on one line */
+    }
+
+    /* Proportionally trim down the labels below the numbers */
+    .achievements__card-label {
+        font-size: 14px !important;
+        line-height: 18px !important;
+        color: #717171 !important;
+    }
+
+    /* Slightly adjust icon dimensions to match the new compact text profile */
+    .achievements__icon-wrapper,
+    .achievements__icon {
+        width: 32px !important;
+        height: 32px !important;
+    }
+}
+
+
+
+
+
+
